@@ -23752,7 +23752,7 @@ var Button = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].button(_t
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!*****************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fhome%2Fbeer-client%2Fpages%2Findex.js ***!
   \*****************************************************************************************************************/
@@ -23775,5 +23775,5 @@ module.exports = dll_1aef2d0bbc0d334d831c;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map

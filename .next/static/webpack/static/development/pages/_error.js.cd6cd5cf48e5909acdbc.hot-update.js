@@ -256,7 +256,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F_error&absolutePagePath=%2FUsers%2Fhome%2Fbeer-client%2Fpages%2F_error.js ***!
   \************************************************************************************************************************/
@@ -269,4 +269,4 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F_error
 /***/ })
 
 })
-//# sourceMappingURL=_error.js.bd124be1c0a5f0357f27.hot-update.js.map
+//# sourceMappingURL=_error.js.cd6cd5cf48e5909acdbc.hot-update.js.map
