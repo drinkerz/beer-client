@@ -87,4 +87,4 @@ const Aside = styled.div`
     }
 `
 
-export default withNamespaces('beerDetail')(BeerDetail)
+export default withNamespaces('beer')(BeerDetail)
