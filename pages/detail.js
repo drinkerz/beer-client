@@ -36,6 +36,15 @@ class BeerDetail extends React.Component {
                 </Beerdescription>
                 <Aside>
                     <div className='blind'></div>
+                    <ul>
+                        <li>
+                        <img src="../static/images/beer/b_12_simg.png" />
+                            <dl>
+                                <dt>Seocho wheat</dt>
+                                <dd>Ale Beer & coke</dd>
+                            </dl>
+                        </li>
+                    </ul>
                 </Aside>
             </>
         )
@@ -43,7 +52,7 @@ class BeerDetail extends React.Component {
 }
 
 const Beerdescription = styled.div`
-    width:cacl (100% - 330px);
+    width:calc(100% - 330px);
 `
 
 const Aside = styled.div`
@@ -57,6 +66,21 @@ const Aside = styled.div`
     > .blind{
         height:122px;
         box-shadow:0 1px 9px -5px rgba(255, 255, 255, 0.4);
+    }
+    >ul{
+        padding:42px;
+        >li{
+            >img{
+                height:62px;
+                width:auto;
+            }
+            dl > dt{
+                color:#fff;
+            }
+            dl > dd{
+                color:rgba(255,255,255,0.3)
+            }
+        }
     }
 `
 

@@ -8,9 +8,6 @@ export default class Footer extends React.Component {
         return (
         <>
             <div>footer</div>
-            <div className="canvas-wrap">
-                <canvas className="canvas"></canvas>
-            </div>
         </>
         )
     }

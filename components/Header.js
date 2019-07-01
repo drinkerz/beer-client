@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { i18n } from '../i18n'
-
 import LanguageBox from './LanguageBox'
+import Link from 'next/link'
 
 export default class Header extends React.Component {
   render() {
@@ -11,7 +10,7 @@ export default class Header extends React.Component {
       <Headerstyled>
         <ul>
           <li className="brand">
-            <img src="../static/images/logo.png" alt="Drinkerz logo" />
+            <Link href="/"><a><img src="../static/images/logo.png" alt="Drinkerz logo" /></a></Link>
           </li>
           <li>
             <LanguageBox language={i18n.language} onChangeLanguage={(language) => i18n.changeLanguage(language)} />
@@ -41,7 +40,7 @@ const Headerstyled = styled.div`
     .brand{
       margin-right: auto;
       padding-left:0;
-      > img {
+      > a > img{
         height: 30px
         width: auto;
       }
