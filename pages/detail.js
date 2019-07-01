@@ -59,6 +59,9 @@ const Aside = styled.div`
     width:330px;
     height:100%;
     background:#000;
+
+
+    
     position:absolute;
     right:0;
     top:0;
