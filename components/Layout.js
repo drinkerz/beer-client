@@ -1,8 +1,8 @@
 import React from 'react'
-import Head from 'next/head'
 import styled from 'styled-components'
 
 import Header from './Header'
+import Footer from './footer'
 
 function Layout(props) {
 
@@ -14,6 +14,7 @@ function Layout(props) {
     <React.Fragment>
       <Header />
       {props.children}
+      <Footer />
     </React.Fragment>
   )
 }

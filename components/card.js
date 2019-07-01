@@ -1,31 +1,45 @@
 import React from "react";
 import styled from "styled-components";
+import Link from 'next/link';
 
 export default class Card extends React.Component {
     render(){
         const {content} = this.props; 
         return (
             <React.Fragment>
-                <CardBox background={content.color}>
-                    <h2>{content.title}</h2>
-                    <p>
-                        <img src={content.img} />
-                    </p>
-                </CardBox>
+              <Link href='/detail'><CardLink>
+                  <CardBox background={content.color}>
+                      <h2>{content.name}</h2>
+                      <p>
+                          <img src={content.img} />
+                      </p>
+                  </CardBox>
+              </CardLink></Link>
             </React.Fragment>
         );
     }
 };
 
+const CardLink = styled.a`
+  text-decoration:none;
+  flex-basis: 20%;
+  cursor:pointer;
+`
+
 const CardBox = styled.div`
-  width: 300px;
+  
+  // display: flex;
+  // flex-direction: column;
+  // width: 300px;
   position: relative;
   > h2 {
-    margin-top: 10px;
-    padding: 0 12px;
     font-size: 24px;
+    padding:20px;
+    color:#000;
+    tex-decolation:none;
   }
   > p {
+    padding:0 20px 20px 0;
     > img {
       height: 200px;
       width: auto;

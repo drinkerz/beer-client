@@ -30,6 +30,9 @@ export default class Header extends React.Component {
 
 const Headerstyled = styled.div`
   > ul {
+    background:#fff;
+    box-shadow:0 1px 9px -5px rgba(0, 0, 0, 0.4);
+    margin:0;
     align-items: center; 
     list-style: none;
     margin-left: auto;
