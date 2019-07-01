@@ -77,7 +77,7 @@ class IndexPage extends React.Component {
             <Button black>Sort by: Newest</Button>
           </span>
           <CardBox>
-            <BeerList />
+            <BeerList beerList={this.beerList}/>
           </CardBox>
         </BeerContent>
       </FlexContainer>
@@ -90,7 +90,8 @@ const FlexContainer = styled.div`
   flex-flow: ${props => props.direction} wrap;
   justify-content: space-around;
   width: 100%;
-  margin: 0 auto;
+  margin: 40px auto;
+
 `
 
 const CardBox = styled.div`

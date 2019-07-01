@@ -7,7 +7,7 @@ export default class Card extends React.Component {
         const {content} = this.props; 
         return (
             <React.Fragment>
-              <Link href='/detail'><CardLink>
+              <Link href='/beer'><CardLink>
                   <CardBox background={content.color}>
                       <h2>{content.name}</h2>
                       <p>
