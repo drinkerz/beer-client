@@ -1,14 +1,14 @@
 import React from 'react'
 
 export default class Footer extends React.Component {
-    componentDidMount() {
-    }
+	componentDidMount() {
+	}
 
-    render() {
-        return (
-        <>
-            <div>footer</div>
-        </>
-        )
-    }
+	render() {
+		return (
+			<>
+				<div>footer</div>
+			</>
+		)
+	}
 }

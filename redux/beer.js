@@ -17,7 +17,6 @@ export const loadBeersList = (data) => ({
 // 초기상태 정의
 const initialState = {
   beerList: [], //맥주 리스트
-
 }
 
 // fetch type 정리?

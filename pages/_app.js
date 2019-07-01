@@ -10,10 +10,8 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import rootReducer from "../redux";
-import { fetchLoadBeersList } from "../redux/beer";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-store.dispatch(fetchLoadBeersList());
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

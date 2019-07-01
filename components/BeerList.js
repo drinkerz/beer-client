@@ -1,18 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import Card from './/card';
+import Card from './Card';
 
 function BeerList({ data }) {
   return (
     <>
-        {data.map((item) => (
-            <Card key={item.id} content={item} />
-        ))}
+      {data.map((item) => (
+        <Card key={item.id} content={item} />
+      ))}
     </>
   );
 }
-
-
 
 const mapStateToProps = state => {
   return {

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux';
 
 // components
-import Card from '../components/card';
 import BeerList from '../components/BeerList';
 
 // icon 
@@ -11,6 +11,9 @@ import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons'
 
 // This is our initialised `NextI18Next` instance
 import { withNamespaces, i18n } from '../i18n'
+
+// dispatch
+import { fetchLoadBeersList } from "../redux/beer";
 
 class IndexPage extends React.Component {
   static async getInitialProps({ req }) {
@@ -23,6 +26,7 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     console.log(i18n.language)
+    this.props.fetchLoadBeersList();
   }
 
   render() {
@@ -156,4 +160,16 @@ export const Button = styled.button`
   font-size: 13px;
 `;
 
-export default withNamespaces('common')(IndexPage)
+const mapStateToProps = state => {
+  return {
+    beerList: state.beer.beerList,
+  }
+}
+
+const mapDispatchToProps = dispatch =>  {
+  return {
+    fetchLoadBeersList: () => dispatch(fetchLoadBeersList())
+  }
+}
+
+export default withNamespaces('common')(connect(mapStateToProps, mapDispatchToProps)(IndexPage));
