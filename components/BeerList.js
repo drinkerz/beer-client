@@ -1,24 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
 import Card from './Card';
 
-function BeerList({ data }) {
+function BeerList(props) {
   return (
     <>
-      {data.map((item) => (
+      {props.beerList.map((item) => (
         <Card key={item.id} content={item} />
       ))}
     </>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    data: state.beer.beerList
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  null
-)(BeerList);
+export default BeerList;

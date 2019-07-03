@@ -10,10 +10,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons'
 
 // This is our initialised `NextI18Next` instance
-import { withNamespaces, i18n } from '../i18n'
+import { withNamespaces } from '../i18n'
 
 // dispatch
-import { fetchLoadBeersList } from "../redux/beer";
+import * as actions from '../actions/beer';
+
+const defaultFilterTypes = ['PaleAle', 'Stout', 'Porter', 'Lager', 'Weizen', 'Fruit', 'Trappist', 'etc'];
 
 class IndexPage extends React.Component {
   static async getInitialProps({ req }) {
@@ -25,47 +27,21 @@ class IndexPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(i18n.language)
-    this.props.fetchLoadBeersList();
+    this.props.fetchLoadBeerList();
+    this.props.fetchLoadReviewList();
   }
 
   render() {
+    const { beerList, t } = this.props;
+    const renderFilterTypes = defaultFilterTypes.map((type, index) => (
+      <li key={index}>{t(type)}<input type="checkbox" /></li>
+    ));
     return (
       <FlexContainer direction="row">
         <BeerFilter>
           <h2><FontAwesomeIcon icon={faFilter} /> Filter by:</h2>
           <ul>
-            <li>
-              페일에일
-              <input type="checkbox" />
-            </li>
-            <li>
-              스카우터
-              <input type="checkbox" />
-            </li>
-            <li>
-              포터
-              <input type="checkbox" />
-            </li>
-            <li>
-              라거
-              <input type="checkbox" />
-            </li>
-            <li>
-              밀<input type="checkbox" />
-            </li>
-            <li>
-              과일
-              <input type="checkbox" />
-            </li>
-            <li>
-              트라피스트
-              <input type="checkbox" />
-            </li>
-            <li>
-              기타
-              <input type="checkbox" />
-            </li>
+            {renderFilterTypes}
           </ul>
         </BeerFilter>
         <BeerContent>
@@ -77,7 +53,7 @@ class IndexPage extends React.Component {
             <Button black>Sort by: Newest</Button>
           </span>
           <CardBox>
-            <BeerList />
+            <BeerList beerList={beerList || []} />
           </CardBox>
         </BeerContent>
       </FlexContainer>
@@ -163,13 +139,15 @@ export const Button = styled.button`
 const mapStateToProps = state => {
   return {
     beerList: state.beer.beerList,
-  }
-}
+    reviewList: state.beer.reviewList,
+  };
+};
 
 const mapDispatchToProps = dispatch =>  {
   return {
-    fetchLoadBeersList: () => dispatch(fetchLoadBeersList())
-  }
-}
+    fetchLoadBeerList: () => dispatch(actions.fetchLoadBeerList()),
+    fetchLoadReviewList: () => dispatch(actions.fetchLoadReviewList()),
+  };
+};
 
-export default withNamespaces('common')(connect(mapStateToProps, mapDispatchToProps)(IndexPage));
+export default withNamespaces('beer')(connect(mapStateToProps, mapDispatchToProps)(IndexPage));

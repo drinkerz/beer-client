@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 export default class Header extends React.Component {
   render() {
+    console.log(i18n);
     return (
       <Headerstyled>
         <ul>
@@ -13,7 +14,7 @@ export default class Header extends React.Component {
             <Link href="/"><a><img src="../static/images/logo.png" alt="Drinkerz logo" /></a></Link>
           </li>
           <li>
-            <LanguageBox language={i18n.language} onChangeLanguage={(language) => i18n.changeLanguage(language)} />
+            <LanguageBox language={i18n.language} onChangeLanguage={(language) => { i18n.changeLanguage(language)}} />
           </li>
           <li>
             <Button>Log in</Button>

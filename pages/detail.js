@@ -1,5 +1,5 @@
 import React from 'react';
-import { withNamespaces } from 'react-i18next';
+import { withNamespaces } from '../i18n';
 import styled from 'styled-components';
 
 class BeerDetail extends React.Component {
