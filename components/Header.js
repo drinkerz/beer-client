@@ -4,8 +4,12 @@ import { i18n } from '../i18n'
 import LanguageBox from './LanguageBox'
 import Link from 'next/link'
 
+//styled component
+import {TextButton, EllipticalButton} from './styled/Button';
+
 export default class Header extends React.Component {
   render() {
+    console.log(i18n);
     return (
       <Headerstyled>
         <ul>
@@ -13,13 +17,13 @@ export default class Header extends React.Component {
             <Link href="/"><a><img src="../static/images/logo.png" alt="Drinkerz logo" /></a></Link>
           </li>
           <li>
-            <LanguageBox language={i18n.language} onChangeLanguage={(language) => i18n.changeLanguage(language)} />
+            <LanguageBox language={i18n.language} onChangeLanguage={(language) => { i18n.changeLanguage(language)}} />
           </li>
           <li>
-            <Button>Log in</Button>
+            <TextButton fontColor="#000">Log in</TextButton>
           </li>
           <li>
-            <Button black>Sign Up</Button>
+            <EllipticalButton fontColor="#fff" bgColor="#1f1f1f">Sign Up</EllipticalButton>
           </li>
         </ul>
       </Headerstyled>
@@ -51,15 +55,4 @@ const Headerstyled = styled.div`
       padding-left:12px;
     }
   }
-`;
-
-export const Button = styled.button`
-  line-height: 42px;
-  padding: 0 20px;
-  background: ${props => (props.black ? "#000" : "")};
-  color: ${props => (props.black ? "#fff" : "")};
-  text-align: center;
-  border: 0;
-  border-radius: 60px;
-  font-size: 13px;
 `;

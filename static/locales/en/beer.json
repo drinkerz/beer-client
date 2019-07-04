@@ -1,0 +1,11 @@
+{
+  "beer": "Beer",
+  "PaleAle": "PaleAle",
+  "Stout": "Stout", 
+  "Porter": "Porter", 
+  "Lager": "Lager", 
+  "Weizen": "Weizen", 
+  "Fruit": "Fruit", 
+  "Trappist": "Trappist", 
+  "etc": "etc"
+}

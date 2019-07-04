@@ -1,0 +1,11 @@
+{
+  "beer": "맥주",
+  "PaleAle": "페일에일",
+  "Stout": "스타우트", 
+  "Porter": "포터", 
+  "Lager": "라거", 
+  "Weizen": "밀", 
+  "Fruit": "과일", 
+  "Trappist": "트라피스트", 
+  "etc": "기타"
+}

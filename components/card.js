@@ -33,7 +33,7 @@ const CardBox = styled.div`
   // width: 300px;
   position: relative;
   > h2 {
-    font-size: 24px;
+    font-size: 20px;
     padding:20px;
     color:#000;
     tex-decolation:none;

@@ -1,17 +1,17 @@
-import React from 'react'
-import App, { Container } from 'next/app'
-import { appWithTranslation } from '../i18n'
-import '../static/styles/style.scss'
-import Layout from '../components/Layout'
-import styled,{createGlobalStyle} from 'styled-components'
+import React from 'react';
+import App, { Container } from 'next/app';
+import { appWithTranslation } from '../i18n';
+import '../static/styles/style.scss';
+import { createGlobalStyle } from 'styled-components';
+import Header from '../components/Header'
+import Footer from '../components/footer'
 
 //Redux 관련
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "../redux";
+import { HashRouter } from 'react-router-dom';
+import configureStore from '../configureStore';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = configureStore();
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -29,12 +29,14 @@ class MyApp extends App {
 
     return (
       <Provider store={store}>
-        <GlobalStyle />
-        <Container>
-          <Layout t={this.props.t}>
-            <Component {...pageProps} />
-          </Layout>
-        </Container>
+        <HashRouter>
+          <GlobalStyle />
+            <Container t={this.props.t}>
+              <Header />
+                <Component {...pageProps} />
+              <Footer />
+          </Container>
+        </HashRouter>
       </Provider>
     );
   }
