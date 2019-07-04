@@ -33,6 +33,8 @@ export default class Header extends React.Component {
 
 const Headerstyled = styled.div`
   > ul {
+    position:relative;
+    z-index:2;
     background:#fff;
     box-shadow:0 1px 9px -5px rgba(0, 0, 0, 0.4);
     margin:0;
@@ -40,12 +42,12 @@ const Headerstyled = styled.div`
     list-style: none;
     margin-left: auto;
     display: flex;
-    padding:40px;
+    padding:20px 40px;
     .brand{
       margin-right: auto;
       padding-left:0;
       > a > img{
-        height: 30px
+        height: 24px
         width: auto;
       }
     }

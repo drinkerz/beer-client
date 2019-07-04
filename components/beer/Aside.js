@@ -80,7 +80,7 @@ const StyledAside = styled.div`
   top:0;
   z-index:0;
   > .blind{
-    height:122px;
+    height:82px;
     border-bottom:1px solid #1f1f1f;
     display:flex;
     >button{
@@ -92,7 +92,7 @@ const StyledAside = styled.div`
       transition: all 0.5s;
     }
     .active{
-      border-bottom:1px solid #fff;
+      // border-bottom:1px solid #fff;
     }
     >button:hover{
       border-bottom:1px solid #fff;

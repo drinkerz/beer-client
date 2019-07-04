@@ -20,7 +20,7 @@ const defaultFilterTypes = ['PaleAle', 'Stout', 'Porter', 'Lager', 'Weizen', 'Fr
 
 class IndexPage extends React.Component {
   static async getInitialProps({ req }) {
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent //컴퓨터 사양??
+    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent //컴퓨터 브라우저 설치된 항목을 보여준다?
     return {
       userAgent,
       namespacesRequired: ['common']
@@ -33,7 +33,7 @@ class IndexPage extends React.Component {
   }
 
   render() {
-    const { beerList, t } = this.props;
+    const { beerList, t } = this.props; //t는 i18n에서 지원해주는 
     const renderFilterTypes = defaultFilterTypes.map((type, index) => (
       <li key={index}>{t(type)}<input type="checkbox" /></li>
     ));
@@ -75,6 +75,9 @@ const CardBox = styled.div`
   display: flex;
   padding: 40px 0;
   flex-wrap: wrap;
+  @media (max-width: 710px) {
+    justify-content:space-evenly;
+  }
 `;
 
 const BeerFilter = styled.div`
@@ -95,6 +98,11 @@ const BeerFilter = styled.div`
       }
     }
   }
+  @media (max-width: 1200px) {
+    position:absolute;
+    left:-100%;
+    transition:all 0.5s;
+  }
 `;
 
 const BeerContent = styled.div`
@@ -102,6 +110,7 @@ const BeerContent = styled.div`
   flex: 1;
   span {
     position: relative;
+    align-items:center;
     > span {
       position: absolute;
       top: 0;
@@ -116,13 +125,19 @@ const BeerContent = styled.div`
       border: 0;
       padding: 20px 20px 20px 56px;
       width: 60%;
-      margin-top: 7px;
       &::placeholder {
         color: #b2b2b2;
       }
     }
     > button {
-      float: right;
+      float:right;
+    }
+  }
+  @media (max-width: 710px) {
+    span > button{display:none;}
+    span > input{
+      width:100%;
+      box-sizing:border-box;
     }
   }
 `;
