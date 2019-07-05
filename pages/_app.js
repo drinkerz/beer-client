@@ -8,7 +8,6 @@ import Footer from '../components/footer'
 
 //Redux 관련
 import { Provider } from "react-redux";
-import { HashRouter } from 'react-router-dom';
 import configureStore from '../configureStore';
 
 const store = configureStore();
@@ -29,14 +28,12 @@ class MyApp extends App {
 
     return (
       <Provider store={store}>
-        <HashRouter>
-          <GlobalStyle />
-            <Container t={this.props.t}>
-              <Header />
-                <Component {...pageProps} />
-              <Footer />
-          </Container>
-        </HashRouter>
+        <GlobalStyle />
+          <Container>
+            <Header />
+              <Component {...pageProps} />
+            <Footer />
+        </Container>
       </Provider>
     );
   }
