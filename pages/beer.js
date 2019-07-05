@@ -1,6 +1,7 @@
-import React from 'react';
-import { withNamespaces } from 'react-i18next';
+// import React from 'react';
+// import { withNamespaces } from 'react-i18next';
 import styled from 'styled-components';
+import { withRouter } from 'next/router';
 
 // component
 import BeerContent from '../components/beer/BeerContent'
@@ -8,22 +9,45 @@ import ReviewsRating from '../components/beer/ReviewsRating'
 import UserReviews from '../components/beer/UserReviews'
 import Aside from '../components/beer/Aside'
 
-class BeerDetail extends React.Component {
-  render(){
-    return(
-      <>
-        <Beerdescription>
-          <BeerContent />
-          <ReviewBox>
-            <ReviewsRating />
-            <UserReviews />
-          </ReviewBox>
-        </Beerdescription>
-        <Aside />
-      </>
-    )
-  }
-}
+// const BeerDetail = withRouter(props => (
+//   <div>
+//     <h1>{props.router.query.name}</h1>
+//     <p>This is the blog post content.</p>
+//   </div>
+// ));
+
+const BeerDetail = withRouter(props => (
+  <div>
+    <h1>{props.router.query.name}</h1>
+    <Beerdescription>
+      <BeerContent />
+      <ReviewBox>
+        <ReviewsRating />
+        <UserReviews />
+      </ReviewBox>
+    </Beerdescription>
+    <Aside />
+  </div>
+));
+
+export default BeerDetail;
+
+// class BeerDetail extends React.Component {
+//   render(){
+//     return(
+//       <>
+        // <Beerdescription>
+        //   <BeerContent />
+        //   <ReviewBox>
+        //     <ReviewsRating />
+        //     <UserReviews />
+        //   </ReviewBox>
+        // </Beerdescription>
+        // <Aside />
+//       </>
+//     )
+//   }
+// }
 
 const ReviewBox = styled.div`
   .tastingreview{
@@ -55,4 +79,4 @@ const Beerdescription = styled.div`
   }
 `
 
-export default withNamespaces('beerDetail')(BeerDetail)
+// export default withNamespaces('beerDetail')(BeerDetail)

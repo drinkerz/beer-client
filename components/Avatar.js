@@ -4,27 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default class Avatar extends React.Component{
+
+  _getAvatarSize(stringSize){
+    switch(stringSize){
+      case 'm':return 42;
+      case 'l':return 62;
+      case 'xl':return 82;
+    }
+  }
+
+  _getAvatarProfile(img, size){
+    return(
+      <AvatarProfile size={size}>
+        {img ? <FontAwesomeIcon icon={faUser}/> : null}
+      </AvatarProfile>
+    )
+  }
+
   render(){
     const {img, size} = this.props;
-    let avatarBox;
-    if(img){
-      if(size === 'xl'){
-        avatarBox = <AvatarProfile background={img} size="82" />;
-      }else if(size === 'l'){
-        avatarBox = <AvatarProfile background={img} size="62" />;
-      }else if(size === 'm'){
-        avatarBox = <AvatarProfile background={img} size="42" />;
-      }
-    }else{
-      if(size === 'xl'){
-        avatarBox = <AvatarProfile size="82"><FontAwesomeIcon icon={faUser}/></AvatarProfile>
-      }else if(size === 'l'){
-        avatarBox = <AvatarProfile size="62"><FontAwesomeIcon icon={faUser}/></AvatarProfile>
-      }else if(size === 'm'){
-        avatarBox = <AvatarProfile size="42"><FontAwesomeIcon icon={faUser}/></AvatarProfile>
-      }
-      
-    }
+    const avatarSize = this._getAvatarSize(size);
+    const avatarBox = this._getAvatarProfile(img, avatarSize);
     
     return(
       <>

@@ -3,21 +3,28 @@ import styled from "styled-components";
 import Link from 'next/link';
 
 export default class Card extends React.Component {
-    render(){
-        const {content} = this.props; 
-        return (
-            <React.Fragment>
-              <Link href='/beer'><CardLink>
-                  <CardBox background={content.color}>
-                      <h2>{content.name}</h2>
-                      <p>
-                          <img src={content.img} />
-                      </p>
-                  </CardBox>
-              </CardLink></Link>
-            </React.Fragment>
-        );
-    }
+  _getBeerNameBlank(beerName){
+    return beerName.toLowerCase().replace(/\s/g, "-");
+  }
+
+  render(){
+    const {content} = this.props; 
+    const beerName = this._getBeerNameBlank(`${content.name}`);
+
+    return (
+      <React.Fragment>
+        <Link as={`/beer/${beerName}`} href={{pathname:'/beer', query:{name:content.name}}}><CardLink>
+        {/* <Link href={{pathname:'/beer', query:{id:content.name}}}><CardLink> */}
+            <CardBox background={content.color}>
+                <h2>{content.name}</h2>
+                <p>
+                    <img src={content.img} />
+                </p>
+            </CardBox>
+        </CardLink></Link>
+      </React.Fragment>
+    );
+  }
 };
 
 const CardLink = styled.a`
@@ -27,7 +34,6 @@ const CardLink = styled.a`
 `
 
 const CardBox = styled.div`
-  
   // display: flex;
   // flex-direction: column;
   // width: 300px;
