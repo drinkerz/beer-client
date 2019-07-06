@@ -9,7 +9,6 @@ import {TextButton, EllipticalButton} from './styled/Button';
 
 export default class Header extends React.Component {
   render() {
-    console.log(i18n);
     return (
       <Headerstyled>
         <ul>
@@ -47,7 +46,7 @@ const Headerstyled = styled.div`
       margin-right: auto;
       padding-left:0;
       > a > img{
-        height: 24px
+        height: 24px;
         width: auto;
       }
     }

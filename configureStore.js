@@ -14,7 +14,7 @@ export default function configureStore() {
     ),
     composeWithDevTools(
       applyMiddleware(
-        logger,
+        // logger,
         thunk,
       )
     )
