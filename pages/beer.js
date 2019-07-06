@@ -1,7 +1,6 @@
-// import React from 'react';
-// import { withNamespaces } from 'react-i18next';
+import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'next/router';
+import { withNamespaces } from 'react-i18next';
 
 // component
 import BeerContent from '../components/beer/BeerContent'
@@ -9,45 +8,39 @@ import ReviewsRating from '../components/beer/ReviewsRating'
 import UserReviews from '../components/beer/UserReviews'
 import Aside from '../components/beer/Aside'
 
-// const BeerDetail = withRouter(props => (
-//   <div>
-//     <h1>{props.router.query.name}</h1>
-//     <p>This is the blog post content.</p>
-//   </div>
-// ));
+// redux
+import { connect } from 'react-redux';
+import * as actions from '../actions/beer';
 
-const BeerDetail = withRouter(props => (
-  <div>
-    <h1>{props.router.query.name}</h1>
-    <Beerdescription>
-      <BeerContent />
-      <ReviewBox>
-        <ReviewsRating />
-        <UserReviews />
-      </ReviewBox>
-    </Beerdescription>
-    <Aside />
-  </div>
-));
+class BeerDetail extends React.Component {
 
-export default BeerDetail;
+  async componentDidMount() {
+    const name = window.location.href.split('beer/').pop();
+    await this.props.getBeerByName(name);
+  }
 
-// class BeerDetail extends React.Component {
-//   render(){
-//     return(
-//       <>
-        // <Beerdescription>
-        //   <BeerContent />
-        //   <ReviewBox>
-        //     <ReviewsRating />
-        //     <UserReviews />
-        //   </ReviewBox>
-        // </Beerdescription>
-        // <Aside />
-//       </>
-//     )
-//   }
-// }
+  _getBeerReviewLength = (reviews) => {
+    return reviews ? reviews.length : 0
+  }
+
+  render() {
+    const { beer } = this.props;
+    const { score, reviews } = beer;
+    const reviewLength = this._getBeerReviewLength(reviews);
+    return (
+      <div>
+        <Beerdescription>
+          <BeerContent beer={beer} />
+          <ReviewBox>
+            <ReviewsRating score={score} reviewLength={reviewLength} />
+            <UserReviews reviews={reviews} />
+          </ReviewBox>
+        </Beerdescription>
+        <Aside />
+      </div>
+    )
+  }
+}
 
 const ReviewBox = styled.div`
   .tastingreview{
@@ -79,4 +72,16 @@ const Beerdescription = styled.div`
   }
 `
 
-// export default withNamespaces('beerDetail')(BeerDetail)
+const mapStateToProps = state => {
+  return {
+    beer: state.beer.beer
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getBeerByName: (name) => dispatch(actions.getBeerByName(name)),
+  }
+};
+
+export default withNamespaces('beer')(connect(mapStateToProps, mapDispatchToProps)(BeerDetail));

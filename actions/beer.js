@@ -32,8 +32,31 @@ export const Actions = {
       type: Actions.LoadReviewList.type,
       payload: {reviewList},
     })
-  }
+  },
+  GetBeerByName: {
+    type: 'GET_BEER_BY_NAME',
+    action: (beer) => ({
+      type: Actions.GetBeerByName.type,
+      payload: {beer},
+    })
+  },
 };
+
+export const getBeerByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const beerResponse = await axios.get(`/beer/${name}`);
+      if ((beerResponse.data !== null) && (beerResponse.data !== undefined)) {
+        dispatch(Actions.GetBeerByName.action(beerResponse.data));
+      } else {
+        dispatch(Actions.GetBeerByName.action(null));
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(Actions.GetBeerByName.action(null));
+    }
+  }
+}
 
 export const fetchLoadBeerList = () => {
   return async (dispatch) => {

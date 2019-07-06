@@ -2,33 +2,35 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default class BeerContent extends React.Component{
-  render(){
+  render() {
+    const { beer } = this.props;
+
     return(
       <>
       <StyledBeerContent>
-        <ImgDiv>
-            <img src="../static/images/beer/b_12_simg.png" />
+        <ImgDiv color={beer.color}>
+          <img src={beer.img} />
         </ImgDiv>
         <ContentText>
           <h2>
-            <span>Ale</span>
-            Seocho wheat
+            <span>{beer.type}</span>
+            {beer.name}
           </h2>
           <p className="description">
-            서초위트는 가장 편하게 마실 수 있는 밀맥주로 밀맥주 특유의 바나나의 풍미를 느낄 수 있는 맥주이다
+            {beer.description}
           </p>
           <ul>
             <li>
               <span>Style:</span>
-              <p>밀맥주</p>
+              <p>{beer.style}</p>
             </li>
             <li>
               <span>ABV:</span>
-              <p>5.48%</p>
+              <p>{beer.abv}%</p>
             </li>
             <li>
               <span>Brewing:</span>
-              <p>세븐브로이</p>
+              <p>{beer.brewed}</p>
             </li>
             <li className="tag">
               <span>Tag:</span>
@@ -55,7 +57,7 @@ const ImgDiv = styled.div`
     position: absolute;
     top: 100px;
     left: 50px;
-    background: rgb(245, 244, 244);
+    background: ${props => props.color};
     display: block;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;

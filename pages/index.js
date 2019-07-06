@@ -13,7 +13,7 @@ import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons'
 // This is our initialised `NextI18Next` instance
 import { withNamespaces } from '../i18n'
 
-// dispatch
+// redux
 import * as actions from '../actions/beer';
 
 const defaultFilterTypes = ['PaleAle', 'Stout', 'Porter', 'Lager', 'Weizen', 'Fruit', 'Trappist', 'etc'];
@@ -29,7 +29,6 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     this.props.fetchLoadBeerList();
-    this.props.fetchLoadReviewList();
   }
 
   render() {
@@ -145,14 +144,12 @@ const BeerContent = styled.div`
 const mapStateToProps = state => {
   return {
     beerList: state.beer.beerList,
-    reviewList: state.beer.reviewList,
   };
 };
 
 const mapDispatchToProps = dispatch =>  {
   return {
     fetchLoadBeerList: () => dispatch(actions.fetchLoadBeerList()),
-    fetchLoadReviewList: () => dispatch(actions.fetchLoadReviewList()),
   };
 };
 

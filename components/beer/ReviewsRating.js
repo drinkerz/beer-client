@@ -3,8 +3,39 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faComments } from '@fortawesome/free-solid-svg-icons'
 
+const emptyScore = { look: 0, smell: 0, taste: 0, feel: 0, price: 0, overall: 0 };
 export default class ReviewsRating extends React.Component{
-  render(){
+
+  _getTotalScore = (score) => {
+    if (!score) {
+      return 0;
+    }
+    const { look, smell, taste, feel, price, overall } = score;
+    return (look + smell + taste + feel + price + overall) / 6;
+  };
+
+  _getRatings = (score) => {
+    const obj = score || emptyScore;
+    return (
+      Object.keys(obj).map((key, index) => {
+        const rating = obj[key] * 20;
+        return (
+          <li key={key + index}>
+            <div>
+              <DrinkerzRatingBar rating={rating} />
+            </div>
+            <span>{key}</span>
+          </li>
+        );
+      })
+    )
+  };
+
+  render() {
+    const { score, reviewLength } = this.props;
+    const totalScore = this._getTotalScore(score);
+    const ratings = this._getRatings(score);
+
     return(
       <>
       <div className="tastingreview">
@@ -23,7 +54,7 @@ export default class ReviewsRating extends React.Component{
               <FontAwesomeIcon icon={faStar} />
             </div>
             <div>
-              <RatingNumber total>4.6</RatingNumber>
+              <RatingNumber total>{totalScore}</RatingNumber>
               <RatingNumber>/5</RatingNumber>
             </div>
           </div>
@@ -33,49 +64,14 @@ export default class ReviewsRating extends React.Component{
               <FontAwesomeIcon icon={faComments} />
             </div>
             <div>
-              <RatingNumber total>4,409</RatingNumber>
+              <RatingNumber total>{reviewLength}</RatingNumber>
             </div>
           </div>
           <div>
             <strong>평점 비율</strong>
             <DrinkerzRating>
               <ul>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="74.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Look</span>
-                </li>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="54.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Smell</span>
-                </li>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="34.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Taste</span>
-                </li>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="94.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Feel</span>
-                </li>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="44.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Price</span>
-                </li>
-                <li>
-                  <div>
-                    <DrinkerzRatingBar rating="74.3"></DrinkerzRatingBar>
-                  </div>
-                  <span>Overall</span>
-                </li>
+                {ratings}
               </ul>
             </DrinkerzRating>
           </div>

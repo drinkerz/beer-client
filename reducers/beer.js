@@ -3,11 +3,18 @@ import {Actions} from '../actions/beer';
 const initialState = {
   beerList: [],
   reviewList: [],
+  beer: {},
   loading: false,
   loadingError: false,
 };
 
 const ActionTypeFunctions = {
+  [Actions.GetBeerByName.type]: (state, action) => {
+    return {
+      ...state,
+      beer: action.payload.beer,
+    };
+  },
   [Actions.LoadBeerList.type]: (state, action) => {
     return {
       ...state,
