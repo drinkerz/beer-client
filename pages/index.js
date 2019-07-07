@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 
 // components
 import BeerList from '../components/BeerList';
-import {EllipticalButton} from '../components/styled/Button';
 
 // icon 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
 // This is our initialised `NextI18Next` instance
 import { withNamespaces } from '../i18n'
@@ -27,8 +26,28 @@ class IndexPage extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        filtered: []
+    }
+  }
+
   componentDidMount() {
     this.props.fetchLoadBeerList();
+    this.setState({
+      filtered: this.props.beerList
+    });
+  }
+
+  filterPosts = (searchFilter) => {
+    let updatedList = this.props.beerList;
+    console.log(updatedList);
+    updatedList= updatedList.filter((item) => {
+      return item.toLowerCase().search(
+        searchFilter.toLowerCase()) !== -1;
+    })
+    console.log(updatedList);
   }
 
   render() {
@@ -44,17 +63,8 @@ class IndexPage extends React.Component {
             {renderFilterTypes}
           </ul>
         </BeerFilter>
-        <BeerContent>
-          <span>
-            <span>
-              <FontAwesomeIcon icon={faSearch} />
-            </span>
-            <input placeholder="Search Beer and more..." />
-            <EllipticalButton bgColor="#1f1f1f" fontColor="#fff">Sort by: Newest</EllipticalButton>
-          </span>
-          <CardBox>
-            <BeerList beerList={beerList || []} />
-          </CardBox>
+        <BeerContent>          
+          <BeerList beerList={beerList || []} />
         </BeerContent>
       </FlexContainer>
     )
@@ -69,15 +79,6 @@ const FlexContainer = styled.div`
   margin: 40px auto;
 
 `
-
-const CardBox = styled.div`
-  display: flex;
-  padding: 40px 0;
-  flex-wrap: wrap;
-  @media (max-width: 710px) {
-    justify-content:space-evenly;
-  }
-`;
 
 const BeerFilter = styled.div`
   padding: 0 40px;
@@ -107,38 +108,6 @@ const BeerFilter = styled.div`
 const BeerContent = styled.div`
   padding: 0 40px;
   flex: 1;
-  span {
-    position: relative;
-    align-items:center;
-    > span {
-      position: absolute;
-      top: 0;
-      left: 24px;
-      > svg {
-        fill: #333;
-      }
-    }
-    > input {
-      border-radius: 20px;
-      background: #f8f8f8;
-      border: 0;
-      padding: 20px 20px 20px 56px;
-      width: 60%;
-      &::placeholder {
-        color: #b2b2b2;
-      }
-    }
-    > button {
-      float:right;
-    }
-  }
-  @media (max-width: 710px) {
-    span > button{display:none;}
-    span > input{
-      width:100%;
-      box-sizing:border-box;
-    }
-  }
 `;
 
 const mapStateToProps = state => {
