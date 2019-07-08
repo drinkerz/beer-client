@@ -4,18 +4,11 @@ import { connect } from 'react-redux';
 
 // components
 import BeerList from '../components/BeerList';
-
-// icon 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter } from '@fortawesome/free-solid-svg-icons'
-
+import BeerFilter from '../components/main/beerFilter';
 // This is our initialised `NextI18Next` instance
 import { withNamespaces } from '../i18n'
-
 // redux
 import * as actions from '../actions/beer';
-
-const defaultFilterTypes = ['PaleAle', 'Stout', 'Porter', 'Lager', 'Weizen', 'Fruit', 'Trappist', 'etc'];
 
 class IndexPage extends React.Component {
   static async getInitialProps({ req }) {
@@ -29,42 +22,79 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        filtered: []
+        filtered: [],
+        checkFiltered: []
     }
   }
 
   componentDidMount() {
     this.props.fetchLoadBeerList();
+  }
+
+  componentWillReceiveProps(nextProps) {
     this.setState({
       filtered: this.props.beerList
     });
   }
 
-  filterPosts = (searchFilter) => {
-    let updatedList = this.props.beerList;
-    console.log(updatedList);
-    updatedList= updatedList.filter((item) => {
-      return item.toLowerCase().search(
-        searchFilter.toLowerCase()) !== -1;
+  //checkbox filter
+  updateBeer = (e) => {
+    const {beerList} = this.props;
+    let checkList = [];
+    if(e.target.checked){
+      const currentList = beerList;
+      checkList = currentList.filter(item => {
+        const lc = item.type.toLowerCase();
+        const filter = e.target.name.toLowerCase();
+        return lc.includes(filter)
+      })
+    }else{
+      this.setState({
+        filtered:[]
+      });
+    }
+    this.setState({
+      filtered:checkList,
+      checkFiltered:{
+        ...this.state.checkFiltered.checkList,
+        checkList
+      }
     })
-    console.log(updatedList);
+    console.log('f');
+    console.log(this.state.filtered);
+    console.log('check');
+    console.log(this.state.checkFiltered.checkList);
+  }
+
+  //search filter
+  onchangeHandleSerach = (e) => {
+    const {beerList} =this.props;
+    let currentList = [];
+    let newList = [];
+    if(e.target.value !== ''){
+      currentList = beerList;
+      newList = currentList.filter(item => {
+        const lc = item.name.toLowerCase();
+        const filter = e.target.value.toLowerCase();
+        return lc.includes(filter)
+      })  
+    }else {
+      newList = this.props.beerList;
+    }
+    this.setState({
+      filtered:newList
+    });
   }
 
   render() {
-    const { beerList, t } = this.props; //t는 i18n에서 지원해주는 
-    const renderFilterTypes = defaultFilterTypes.map((type, index) => (
-      <li key={index}>{t(type)}<input type="checkbox" /></li>
-    ));
+    const { t } = this.props; //t는 i18n에서 지원해주는 국가 정보가 들어가있음?
+    
     return (
       <FlexContainer direction="row">
-        <BeerFilter>
-          <h2><FontAwesomeIcon icon={faFilter} /> Filter by:</h2>
-          <ul>
-            {renderFilterTypes}
-          </ul>
-        </BeerFilter>
+        <BeerFilter t={t} updateBeer={this.updateBeer}/>
         <BeerContent>          
-          <BeerList beerList={beerList || []} />
+          {/* <BeerList beerList={beerList || []} /> */}
+          <BeerList onchangeHandleSerach={this.onchangeHandleSerach} filtered={this.state.filtered} />
         </BeerContent>
       </FlexContainer>
     )
@@ -79,31 +109,6 @@ const FlexContainer = styled.div`
   margin: 40px auto;
 
 `
-
-const BeerFilter = styled.div`
-  padding: 0 40px;
-  width: 170px;
-  > ul {
-    margin-top: 60px;
-    list-style: none;
-    padding: 0;
-    > li {
-      padding: 12px 0;
-      font-size: 13px;
-      position: relative;
-      > input {
-        position: absolute;
-        right: 0;
-        margin: 0;
-      }
-    }
-  }
-  @media (max-width: 1200px) {
-    position:absolute;
-    left:-100%;
-    transition:all 0.5s;
-  }
-`;
 
 const BeerContent = styled.div`
   padding: 0 40px;

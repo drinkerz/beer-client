@@ -3,13 +3,18 @@ import styled from 'styled-components'
 import { i18n } from '../i18n'
 import LanguageBox from './LanguageBox'
 import Link from 'next/link'
+import Modal from './styled/Modal'
 
 //styled component
 import {TextButton, EllipticalButton} from './styled/Button';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook } from '@fortawesome/free-solid-svg-icons'
+
 export default class Header extends React.Component {
   render() {
     return (
+      <>
       <Headerstyled>
         <ul>
           <li className="brand">
@@ -26,9 +31,43 @@ export default class Header extends React.Component {
           </li>
         </ul>
       </Headerstyled>
+      {/* <Modal modalSize="xs" title={<LoginModal src="../static/images/logo.png" alt="Drinkerz logo" />} titleAlign="center" contentAlign="center">
+        <div>마시는 문화 공유 플랫폼 드링커즈에 오신 것을 환영합니다.</div>
+        <LoginBox>
+          <EllipticalButton bgColor="#30c63b" fontColor="#fff">
+            <IconNaver>네이버 아이콘</IconNaver>
+            LOGIN WITH NAVER
+          </EllipticalButton>
+        </LoginBox>
+      </Modal> */}
+      </>
     )
   }
 }
+
+const IconNaver = styled.span`
+  display:inline-block;
+  margin-right:8px;
+  vertical-align:sub;
+  background-position:-1px -3px;
+  width:18px;
+  height:18px;
+  background:url(../static/images/iconset.png) no-repeat 0 0;
+  text-indent:-9999px;
+  overflow:hidden;
+`
+
+const LoginBox = styled.div`
+  margin-top:20px;
+  >button{
+    width:100%;
+  }
+`
+
+const LoginModal = styled.img`
+  width:auto;
+  height:24px;
+`
 
 const Headerstyled = styled.div`
   > ul {

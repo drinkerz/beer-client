@@ -14,7 +14,7 @@ export default class UserReviews extends React.Component{
     return reviews.map((review, index) => (
       <li key={index}>
         <ProfileBar>
-          <Avatar nickname={review.reviewer.name} img={review.reviewer.img ? review.reviewer.img : '../../static/images/dummyprofile.jpg'} size="m" />
+          <Avatar nickname={review.reviewer.name} img={review.reviewer.img ? review.reviewer.img : '../../static/images/dummyprofile.jpg'} />
           <NickName>{review.reviewer.name}</NickName>
           <span>리뷰작성수 {review.reviewer.reviews.length}</span>
           <span><FontAwesomeIcon icon={faBeer} />{review.like}</span>

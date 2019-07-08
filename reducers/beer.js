@@ -6,6 +6,7 @@ const initialState = {
   beer: {},
   loading: false,
   loadingError: false,
+  loggedIn: false,  //로그인 여부 체크
 };
 
 const ActionTypeFunctions = {
