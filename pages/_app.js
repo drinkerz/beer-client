@@ -50,6 +50,10 @@ const GlobalStyle = createGlobalStyle`
     margin:0;
     >li{padding:0; margin:0;}
   }
+  a{
+    text-decoration:none;
+    color:inherit;
+  }
 `;
 
 export default appWithTranslation(MyApp)
