@@ -82,12 +82,13 @@ const AdultPage = () => {
     console.log('enter');
   }
 
-  return isLoading ? (
-    <Loading />
-  ) : (
-    <FullSizeDiv>
-      <NeonTitle onClick={enter}>Save Water, Drink Beer!</NeonTitle>
-    </FullSizeDiv>
+  return (
+    <>
+      <Loading />
+      <FullSizeDiv>
+        <NeonTitle onClick={enter}>Save Water, Drink Beer!</NeonTitle>
+      </FullSizeDiv>
+    </>
   );
 }
 

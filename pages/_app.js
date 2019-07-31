@@ -31,7 +31,7 @@ class MyApp extends App {
         <GlobalStyle />
           <Container>
             {/* <Header /> */}
-              <Component {...pageProps} />
+            <Component {...pageProps} />
             {/* <Footer /> */}
         </Container>
       </Provider>

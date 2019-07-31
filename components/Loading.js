@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import NProgress from 'nprogress';
 
 const styles = (function() {
-  const width = 150;
+  const width = 120;
   const height = width * 1.4;
   return {
     width, height,
@@ -19,13 +18,22 @@ const styles = (function() {
   };
 })();
 
-const FullSizeDiv = styled.div`
-  height: 100vh;
+const Popup = styled.div`
   background-color: ${props => props.bgColor};
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+
+  width: 100%;
+  height: 250px;
+  padding: 20px;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  margin-top: -125px;
+  justify-content: center;
 `;
 
 const BeerMug = styled.div`
@@ -159,28 +167,54 @@ const Beer = styled.div`
   }
 `;
 
-const Loading = (props) => {
+const Loading = () => {
+  const [play, setPlay] = useState(null);
+  const [bar, setBar] = useState(null);
+  const [count, setCount] = useState(3);
   useEffect(() => {
-    NProgress.configure({ 
-      parent: '.beer',
-      showSpinner: false,
-      ease: 'ease',
-      speed: 1000,
-      trickleSpeed: 1000,
-      template: '<div class="bar" role="bar"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div>'
-    });
-    NProgress.start();
-    NProgress.set(0.4);
-    NProgress.inc();
-    NProgress.set(1);
+    if (play === null) {
+      if (bar) {
+        let beerHeight = 0;
+        bar.style.width = '0px';
+        const p = setInterval(() => {
+          if (beerHeight < styles.beerHeight) {
+            beerHeight++;
+            bar.style.width = beerHeight + 'px';
+          } else {
+            if (count > 0) {
+              setCount(0);
+              beerHeight = 0;
+              bar.style.width = '0px';
+            } else {
+              clearInterval(p);
+              setPlay(null);
+            }
+          }
+        }, 15);
+        setPlay(p);
+      } else {
+        setBar(document.querySelector('.bar'));
+      }
+    }
   });
   return (
-    <FullSizeDiv bgColor="#222">
+    <Popup bgColor="#222">
       <BeerMug width={150} bgColor="rgba(255,255,255,0.4)">
         <Handle width={150} height={150 * 1.4} />
-        <Beer className="beer" />
+        <Beer className="beer nprogress-custom-parent">
+          <div id="nprogress">
+            <div className="bar" role="bar">
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+              <div className="bubble"></div>
+            </div>
+          </div>
+        </Beer>
       </BeerMug>
-    </FullSizeDiv>
+    </Popup>
   )
 };
 
