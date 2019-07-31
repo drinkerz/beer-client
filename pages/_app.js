@@ -30,9 +30,9 @@ class MyApp extends App {
       <Provider store={store}>
         <GlobalStyle />
           <Container>
-            <Header />
+            {/* <Header /> */}
               <Component {...pageProps} />
-            <Footer />
+            {/* <Footer /> */}
         </Container>
       </Provider>
     );
