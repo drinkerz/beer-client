@@ -170,7 +170,6 @@ const Beer = styled.div`
 const Loading = () => {
   const [play, setPlay] = useState(null);
   const [bar, setBar] = useState(null);
-  const [count, setCount] = useState(3);
   useEffect(() => {
     if (play === null) {
       if (bar) {
@@ -181,14 +180,8 @@ const Loading = () => {
             beerHeight++;
             bar.style.width = beerHeight + 'px';
           } else {
-            if (count > 0) {
-              setCount(0);
-              beerHeight = 0;
-              bar.style.width = '0px';
-            } else {
-              clearInterval(p);
-              setPlay(null);
-            }
+            beerHeight = 0;
+            bar.style.width = '0px';
           }
         }, 15);
         setPlay(p);

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Router from 'next/router';
 import styled from 'styled-components';
-import { EventEmitter } from 'events';
 
-import Loading from '../components/Loading';
 const FullSizeDiv = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -12,6 +11,17 @@ const FullSizeDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #061627;
+    opacity: 0.5;
+  }
 `;
 const NeonTitle = styled.h1`
   font-size: 48px;
@@ -25,6 +35,7 @@ const NeonTitle = styled.h1`
   animation: flicker 1.5s infinite alternate;
   cursor: pointer;
   user-select: none;
+  z-index: 2;
   
   &::-moz-selection {
     background-color: #08f;
@@ -67,24 +78,12 @@ const NeonTitle = styled.h1`
 `;
 
 const AdultPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const login = () => setIsLoggedIn(true);
-  const logout = () => setIsLoggedIn(false);
-
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => setIsLoading(false), 2500);
-    }
-  });
-
   const enter = () => {
-    console.log('enter');
+    Router.push('/lobby');
   }
 
   return (
     <>
-      <Loading />
       <FullSizeDiv>
         <NeonTitle onClick={enter}>Save Water, Drink Beer!</NeonTitle>
       </FullSizeDiv>
