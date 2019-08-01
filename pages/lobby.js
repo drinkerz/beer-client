@@ -115,6 +115,7 @@ const CardImage = styled.div`
   img {
     height: 75%;
     margin-top: 20%;
+    transition: transform 500ms ease;
   }
 `;
 
